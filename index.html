@@ -1,417 +1,503 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Be My Valentine, Promise 💌</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Be My Valentine, Promise 💌</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-  body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #1a0a0e;
-    overflow: hidden;
-    font-family: 'Cormorant Garamond', serif;
-  }
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #1a0a0e;
+        overflow: hidden;
+        font-family: 'Cormorant Garamond', serif;
+      }
 
-  .bg-hearts {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
+      .bg-hearts {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
 
-  .floating-heart {
-    position: absolute;
-    font-size: 1.4rem;
-    opacity: 0;
-    animation: floatUp linear infinite;
-    color: #e8456b;
-    filter: blur(1px);
-  }
+      .floating-heart {
+        position: absolute;
+        font-size: 1.4rem;
+        opacity: 0;
+        animation: floatUp linear infinite;
+        color: #e8456b;
+        filter: blur(1px);
+      }
 
-  @keyframes floatUp {
-    0% { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; }
-    10% { opacity: 0.15; }
-    90% { opacity: 0.08; }
-    100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; }
-  }
+      @keyframes floatUp {
+        0% {
+          transform: translateY(100vh) rotate(0deg) scale(0.5);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.15;
+        }
+        90% {
+          opacity: 0.08;
+        }
+        100% {
+          transform: translateY(-10vh) rotate(360deg) scale(1.2);
+          opacity: 0;
+        }
+      }
 
-  .card-container {
-    position: relative;
-    z-index: 1;
-    perspective: 1200px;
-    padding: 20px;
-  }
+      .card-container {
+        position: relative;
+        z-index: 1;
+        perspective: 1200px;
+        padding: 20px;
+      }
 
-  .card {
-    background: linear-gradient(
-      165deg,
-      #2d0f18 0%,
-      #1f0a10 30%,
-      #2a0e16 60%,
-      #1a0a0e 100%
-    );
-    border: 1px solid rgba(232, 69, 107, 0.15);
-    border-radius: 24px;
-    max-width: 580px;
-    width: 100%;
-    padding: 56px 48px 48px;
-    position: relative;
-    overflow: hidden;
-    box-shadow:
-      0 0 80px rgba(232, 69, 107, 0.08),
-      0 0 160px rgba(183, 28, 64, 0.04),
-      0 30px 60px rgba(0,0,0,0.5);
-    animation: cardEntrance 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-    opacity: 0;
-    transform: translateY(40px);
-  }
+      .card {
+        background: linear-gradient(
+          165deg,
+          #2d0f18 0%,
+          #1f0a10 30%,
+          #2a0e16 60%,
+          #1a0a0e 100%
+        );
+        border: 1px solid rgba(232, 69, 107, 0.15);
+        border-radius: 24px;
+        max-width: 580px;
+        width: 100%;
+        padding: 56px 48px 48px;
+        position: relative;
+        overflow: hidden;
+        box-shadow:
+          0 0 80px rgba(232, 69, 107, 0.08),
+          0 0 160px rgba(183, 28, 64, 0.04),
+          0 30px 60px rgba(0, 0, 0, 0.5);
+        animation: cardEntrance 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        opacity: 0;
+        transform: translateY(40px);
+      }
 
-  @keyframes cardEntrance {
-    to { opacity: 1; transform: translateY(0); }
-  }
+      @keyframes cardEntrance {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-  .card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(
-      ellipse at 30% 20%,
-      rgba(232, 69, 107, 0.06) 0%,
-      transparent 50%
-    );
-    pointer-events: none;
-  }
+      .card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          ellipse at 30% 20%,
+          rgba(232, 69, 107, 0.06) 0%,
+          transparent 50%
+        );
+        pointer-events: none;
+      }
 
-  .rose-accent {
-    position: absolute;
-    top: -2px;
-    right: -2px;
-    width: 140px;
-    height: 140px;
-    background: radial-gradient(
-      circle at 80% 20%,
-      rgba(232, 69, 107, 0.12) 0%,
-      transparent 60%
-    );
-    border-radius: 0 24px 0 0;
-    pointer-events: none;
-  }
+      .rose-accent {
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        width: 140px;
+        height: 140px;
+        background: radial-gradient(
+          circle at 80% 20%,
+          rgba(232, 69, 107, 0.12) 0%,
+          transparent 60%
+        );
+        border-radius: 0 24px 0 0;
+        pointer-events: none;
+      }
 
-  .header {
-    text-align: center;
-    margin-bottom: 40px;
-    animation: fadeIn 1s 0.4s both;
-  }
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+        animation: fadeIn 1s 0.4s both;
+      }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-  .heart-icon {
-    font-size: 2.4rem;
-    display: inline-block;
-    animation: heartbeat 1.5s ease-in-out infinite;
-    filter: drop-shadow(0 0 12px rgba(232, 69, 107, 0.5));
-    margin-bottom: 16px;
-  }
+      .heart-icon {
+        font-size: 2.4rem;
+        display: inline-block;
+        animation: heartbeat 1.5s ease-in-out infinite;
+        filter: drop-shadow(0 0 12px rgba(232, 69, 107, 0.5));
+        margin-bottom: 16px;
+      }
 
-  @keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    14% { transform: scale(1.15); }
-    28% { transform: scale(1); }
-    42% { transform: scale(1.1); }
-    56% { transform: scale(1); }
-  }
+      @keyframes heartbeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        14% {
+          transform: scale(1.15);
+        }
+        28% {
+          transform: scale(1);
+        }
+        42% {
+          transform: scale(1.1);
+        }
+        56% {
+          transform: scale(1);
+        }
+      }
 
-  .title {
-    font-family: 'Great Vibes', cursive;
-    font-size: 3.2rem;
-    color: #e8456b;
-    letter-spacing: 1px;
-    line-height: 1.2;
-    text-shadow: 0 0 30px rgba(232, 69, 107, 0.3);
-  }
+      .title {
+        font-family: 'Great Vibes', cursive;
+        font-size: 3.2rem;
+        color: #e8456b;
+        letter-spacing: 1px;
+        line-height: 1.2;
+        text-shadow: 0 0 30px rgba(232, 69, 107, 0.3);
+      }
 
-  .subtitle {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.95rem;
-    color: rgba(232, 180, 195, 0.5);
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    margin-top: 10px;
-  }
+      .subtitle {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 0.95rem;
+        color: rgba(232, 180, 195, 0.5);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-top: 10px;
+      }
 
-  .divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    margin: 8px 0 36px;
-    animation: fadeIn 1s 0.6s both;
-  }
+      .divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        margin: 8px 0 36px;
+        animation: fadeIn 1s 0.6s both;
+      }
 
-  .divider-line {
-    height: 1px;
-    width: 60px;
-    background: linear-gradient(90deg, transparent, rgba(232, 69, 107, 0.3), transparent);
-  }
+      .divider-line {
+        height: 1px;
+        width: 60px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(232, 69, 107, 0.3),
+          transparent
+        );
+      }
 
-  .divider-diamond {
-    width: 6px;
-    height: 6px;
-    background: rgba(232, 69, 107, 0.4);
-    transform: rotate(45deg);
-  }
+      .divider-diamond {
+        width: 6px;
+        height: 6px;
+        background: rgba(232, 69, 107, 0.4);
+        transform: rotate(45deg);
+      }
 
-  .message {
-    animation: fadeIn 1s 0.8s both;
-  }
+      .message {
+        animation: fadeIn 1s 0.8s both;
+      }
 
-  .message p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.18rem;
-    line-height: 1.85;
-    color: rgba(232, 200, 210, 0.85);
-    font-weight: 300;
-    margin-bottom: 20px;
-    font-style: italic;
-    text-align: center;
-  }
+      .message p {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.18rem;
+        line-height: 1.85;
+        color: rgba(232, 200, 210, 0.85);
+        font-weight: 300;
+        margin-bottom: 20px;
+        font-style: italic;
+        text-align: center;
+      }
 
-  .message p:last-child {
-    margin-bottom: 0;
-  }
+      .message p:last-child {
+        margin-bottom: 0;
+      }
 
-  .name-highlight {
-    color: #e8456b;
-    font-family: 'Great Vibes', cursive;
-    font-size: 1.6rem;
-    font-style: normal;
-    filter: drop-shadow(0 0 8px rgba(232, 69, 107, 0.3));
-  }
+      .name-highlight {
+        color: #e8456b;
+        font-family: 'Great Vibes', cursive;
+        font-size: 1.6rem;
+        font-style: normal;
+        filter: drop-shadow(0 0 8px rgba(232, 69, 107, 0.3));
+      }
 
-  .closing {
-    text-align: center;
-    margin-top: 40px;
-    animation: fadeIn 1s 1s both;
-  }
+      .closing {
+        text-align: center;
+        margin-top: 40px;
+        animation: fadeIn 1s 1s both;
+      }
 
-  .closing-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    color: rgba(232, 180, 195, 0.5);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
+      .closing-text {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1rem;
+        color: rgba(232, 180, 195, 0.5);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
 
-  .closing-name {
-    font-family: 'Great Vibes', cursive;
-    font-size: 1.8rem;
-    color: #e8456b;
-  }
+      .closing-name {
+        font-family: 'Great Vibes', cursive;
+        font-size: 1.8rem;
+        color: #e8456b;
+      }
 
-  .bottom-hearts {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 32px;
-    animation: fadeIn 1s 1.2s both;
-  }
+      .bottom-hearts {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 32px;
+        animation: fadeIn 1s 1.2s both;
+      }
 
-  .bottom-hearts span {
-    font-size: 0.7rem;
-    color: rgba(232, 69, 107, 0.3);
-    animation: twinkle 2s ease-in-out infinite;
-  }
+      .bottom-hearts span {
+        font-size: 0.7rem;
+        color: rgba(232, 69, 107, 0.3);
+        animation: twinkle 2s ease-in-out infinite;
+      }
 
-  .bottom-hearts span:nth-child(2) { animation-delay: 0.3s; }
-  .bottom-hearts span:nth-child(3) { animation-delay: 0.6s; }
-  .bottom-hearts span:nth-child(4) { animation-delay: 0.9s; }
-  .bottom-hearts span:nth-child(5) { animation-delay: 1.2s; }
+      .bottom-hearts span:nth-child(2) {
+        animation-delay: 0.3s;
+      }
+      .bottom-hearts span:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+      .bottom-hearts span:nth-child(4) {
+        animation-delay: 0.9s;
+      }
+      .bottom-hearts span:nth-child(5) {
+        animation-delay: 1.2s;
+      }
 
-  @keyframes twinkle {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.8; }
-  }
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.3;
+        }
+        50% {
+          opacity: 0.8;
+        }
+      }
 
-  /* Canva prompt section */
-  .canva-section {
-    position: relative;
-    z-index: 1;
-    max-width: 580px;
-    width: 100%;
-    margin-top: 32px;
-    background: rgba(255,255,255, 0.03);
-    border: 1px solid rgba(232, 69, 107, 0.1);
-    border-radius: 16px;
-    padding: 32px;
-    animation: fadeIn 1s 1.4s both;
-  }
+      /* Canva prompt section */
+      .canva-section {
+        position: relative;
+        z-index: 1;
+        max-width: 580px;
+        width: 100%;
+        margin-top: 32px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(232, 69, 107, 0.1);
+        border-radius: 16px;
+        padding: 32px;
+        animation: fadeIn 1s 1.4s both;
+      }
 
-  .canva-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    color: #e8456b;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+      .canva-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.1rem;
+        color: #e8456b;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
 
-  .canva-prompt {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    line-height: 1.75;
-    color: rgba(232, 200, 210, 0.7);
-    background: rgba(0,0,0,0.3);
-    border-radius: 12px;
-    padding: 20px 24px;
-    border: 1px solid rgba(232, 69, 107, 0.08);
-    position: relative;
-  }
+      .canva-prompt {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1rem;
+        line-height: 1.75;
+        color: rgba(232, 200, 210, 0.7);
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+        padding: 20px 24px;
+        border: 1px solid rgba(232, 69, 107, 0.08);
+        position: relative;
+      }
 
-  .copy-btn {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: rgba(232, 69, 107, 0.15);
-    border: 1px solid rgba(232, 69, 107, 0.2);
-    color: #e8456b;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.85rem;
-    padding: 6px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
+      .copy-btn {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: rgba(232, 69, 107, 0.15);
+        border: 1px solid rgba(232, 69, 107, 0.2);
+        color: #e8456b;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 0.85rem;
+        padding: 6px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
 
-  .copy-btn:hover {
-    background: rgba(232, 69, 107, 0.25);
-  }
+      .copy-btn:hover {
+        background: rgba(232, 69, 107, 0.25);
+      }
 
-  .canva-note {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.9rem;
-    color: rgba(232, 180, 195, 0.4);
-    margin-top: 14px;
-    font-style: italic;
-  }
+      .canva-note {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 0.9rem;
+        color: rgba(232, 180, 195, 0.4);
+        margin-top: 14px;
+        font-style: italic;
+      }
 
-  @media (max-width: 640px) {
-    .card { padding: 40px 28px 36px; }
-    .title { font-size: 2.4rem; }
-    .message p { font-size: 1.05rem; }
-    .canva-section { padding: 24px; }
-  }
-</style>
-</head>
-<body>
+      @media (max-width: 640px) {
+        .card {
+          padding: 40px 28px 36px;
+        }
+        .title {
+          font-size: 2.4rem;
+        }
+        .message p {
+          font-size: 1.05rem;
+        }
+        .canva-section {
+          padding: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-hearts" id="bgHearts"></div>
 
-<div class="bg-hearts" id="bgHearts"></div>
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      "
+    >
+      <div class="card-container">
+        <div class="card">
+          <div class="rose-accent"></div>
 
-<div style="display:flex; flex-direction:column; align-items:center; width:100%;">
-  <div class="card-container">
-    <div class="card">
-      <div class="rose-accent"></div>
+          <div class="header">
+            <div class="heart-icon">❤️</div>
+            <div class="title">Be My Valentine</div>
+            <div class="subtitle">February 14, 2026</div>
+          </div>
 
-      <div class="header">
-        <div class="heart-icon">❤️</div>
-        <div class="title">Be My Valentine</div>
-        <div class="subtitle">February 14, 2026</div>
+          <div class="divider">
+            <div class="divider-line"></div>
+            <div class="divider-diamond"></div>
+            <div class="divider-line"></div>
+          </div>
+
+          <div class="message">
+            <p>
+              If I had to choose between breathing and loving you, I'd use my
+              last breath to whisper your name —
+              <span class="name-highlight">Promise</span>.
+            </p>
+            <p>
+              You walked into my world like the softest melody, the kind that
+              stays on your lips long after the song ends. Every moment with you
+              feels like the universe whispering,
+              <em>"this is what I made love for."</em>
+            </p>
+            <p>
+              You are my calm in chaos, my warmth in winter, and the reason my
+              heart learned what it was beating for.
+            </p>
+            <p>
+              So today, I'm not just asking you to be my Valentine. I'm asking
+              you to keep being the reason I smile before I even open my eyes
+              each morning.
+            </p>
+            <p>
+              <span class="name-highlight">Promise</span>, will you be my
+              Valentine? ❤️
+            </p>
+          </div>
+
+          <div class="closing">
+            <div class="closing-text">Forever yours,</div>
+            <div class="closing-name">— Apoh Eldrige 💌</div>
+          </div>
+
+          <div class="bottom-hearts">
+            <span>♥</span><span>♥</span><span>♥</span><span>♥</span
+            ><span>♥</span>
+          </div>
+        </div>
       </div>
 
-      <div class="divider">
-        <div class="divider-line"></div>
-        <div class="divider-diamond"></div>
-        <div class="divider-line"></div>
-      </div>
-
-      <div class="message">
-        <p>
-          If I had to choose between breathing and loving you,
-          I'd use my last breath to whisper your name — <span class="name-highlight">Promise</span>.
-        </p>
-        <p>
-          You walked into my world like the softest melody,
-          the kind that stays on your lips long after the song ends.
-          Every moment with you feels like the universe whispering,
-          <em>"this is what I made love for."</em>
-        </p>
-        <p>
-          You are my calm in chaos, my warmth in winter,
-          and the reason my heart learned what it was beating for.
-        </p>
-        <p>
-          So today, I'm not just asking you to be my Valentine.
-          I'm asking you to keep being the reason I smile
-          before I even open my eyes each morning.
-        </p>
-        <p>
-          <span class="name-highlight">Promise</span>, will you be my Valentine? ❤️
-        </p>
-      </div>
-
-      <div class="closing">
-        <div class="closing-text">Forever yours,</div>
-        <div class="closing-name">— Your Love 💌</div>
-      </div>
-
-      <div class="bottom-hearts">
-        <span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span>
+      <!-- Canva Prompt Section -->
+      <div class="canva-section">
+        <div class="canva-title">🎨 Your Canva Prompt</div>
+        <div class="canva-prompt" id="canvaPrompt">
+          <button class="copy-btn" onclick="copyPrompt()">Copy</button>
+          Create a romantic Valentine's Day card design with a deep burgundy and
+          dark rose background. Use elegant gold or soft pink script typography
+          for the headline "Be My Valentine, Promise." Add subtle floating
+          hearts, soft bokeh light effects, and delicate rose petals scattered
+          around the edges. Include a warm, dreamy glow in the center where the
+          text sits. The mood should feel intimate, poetic, and luxurious — like
+          candlelight on velvet. Use a serif font for the body text and a
+          flowing calligraphy font for the name "Promise." Add a small gold
+          heart accent near the signature. The overall feel should be dark
+          romance — warm, rich, and deeply personal. Portrait orientation,
+          Instagram story or A5 card size.
+        </div>
+        <div class="canva-note">
+          ✨ Tip: Paste this into Canva's AI image generator or use it as a
+          design brief to guide your card layout. You can also add the write-up
+          text from above into your Canva design!
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Canva Prompt Section -->
-  <div class="canva-section">
-    <div class="canva-title">🎨 Your Canva Prompt</div>
-    <div class="canva-prompt" id="canvaPrompt">
-      <button class="copy-btn" onclick="copyPrompt()">Copy</button>
-      Create a romantic Valentine's Day card design with a deep burgundy and dark rose background. Use elegant gold or soft pink script typography for the headline "Be My Valentine, Promise." Add subtle floating hearts, soft bokeh light effects, and delicate rose petals scattered around the edges. Include a warm, dreamy glow in the center where the text sits. The mood should feel intimate, poetic, and luxurious — like candlelight on velvet. Use a serif font for the body text and a flowing calligraphy font for the name "Promise." Add a small gold heart accent near the signature. The overall feel should be dark romance — warm, rich, and deeply personal. Portrait orientation, Instagram story or A5 card size.
-    </div>
-    <div class="canva-note">
-      ✨ Tip: Paste this into Canva's AI image generator or use it as a design brief to guide your card layout. You can also add the write-up text from above into your Canva design!
-    </div>
-  </div>
-</div>
+    <script>
+      // Floating hearts background
+      const container = document.getElementById('bgHearts');
+      const hearts = ['♥', '❤', '♡', '💕'];
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('span');
+        heart.className = 'floating-heart';
+        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animationDuration = 8 + Math.random() * 12 + 's';
+        heart.style.animationDelay = Math.random() * 10 + 's';
+        heart.style.fontSize = 0.8 + Math.random() * 1.2 + 'rem';
+        container.appendChild(heart);
+      }
 
-<script>
-  // Floating hearts background
-  const container = document.getElementById('bgHearts');
-  const hearts = ['♥', '❤', '♡', '💕'];
-  for (let i = 0; i < 20; i++) {
-    const heart = document.createElement('span');
-    heart.className = 'floating-heart';
-    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-    heart.style.left = Math.random() * 100 + '%';
-    heart.style.animationDuration = (8 + Math.random() * 12) + 's';
-    heart.style.animationDelay = Math.random() * 10 + 's';
-    heart.style.fontSize = (0.8 + Math.random() * 1.2) + 'rem';
-    container.appendChild(heart);
-  }
-
-  // Copy prompt
-  function copyPrompt() {
-    const text = document.getElementById('canvaPrompt').innerText.replace('Copy', '').trim();
-    navigator.clipboard.writeText(text).then(() => {
-      const btn = document.querySelector('.copy-btn');
-      btn.textContent = 'Copied!';
-      setTimeout(() => btn.textContent = 'Copy', 2000);
-    });
-  }
-</script>
-
-</body>
+      // Copy prompt
+      function copyPrompt() {
+        const text = document
+          .getElementById('canvaPrompt')
+          .innerText.replace('Copy', '')
+          .trim();
+        navigator.clipboard.writeText(text).then(() => {
+          const btn = document.querySelector('.copy-btn');
+          btn.textContent = 'Copied!';
+          setTimeout(() => (btn.textContent = 'Copy'), 2000);
+        });
+      }
+    </script>
+  </body>
 </html>
